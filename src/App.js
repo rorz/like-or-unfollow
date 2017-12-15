@@ -24,7 +24,7 @@ class Home extends React.Component {
         }
       });
     } else {
-      window.alert('no access token detected');
+      console.log('no access token detected');
     }
   }
 
@@ -48,7 +48,16 @@ class Home extends React.Component {
     );
 
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          marginTop: 60,
+        }}
+      >
         <h2>Home</h2>
         {displayItem}
       </div>
