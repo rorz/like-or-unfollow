@@ -9,7 +9,8 @@ import Restler from 'restler'
 class Home extends React.Component {
 
   state = {
-    instaToken: (this.props.match.params.instaToken) && this.props.match.params.instaToken.substr(14),
+    instaToken: (this.props.location.hash) && this.props.location.hash.substr(14),
+    roundCount: 0,
   }
 
   componentWillMount() {
@@ -35,14 +36,47 @@ class Home extends React.Component {
   }
 
   newRound = () => {
-
+    this.setState({
+      roundCount: this.state.roundCount += 1,
+    });
   }
 
   render() {
 
     const accessToken = this.state.instaToken;
+    const { roundCount } = this.state;
+
+    let loggedInDisplay = (
+      <div>
+        <button onClick={this.newRound}>
+          Start
+        </button>
+      </div>
+    );
+
+    if (roundCount > 0) {
+      loggedInDisplay = (
+        <div>
+          <h2>Round {roundCount}</h2>
+          <h3>You must like:</h3>
+          <br />
+          PIC_HERE
+          <br />
+          BUTTON_LIKE
+          <hr />
+          or
+          <br />
+          <h3>Unfollow USER_HERE</h3>
+          BUTTON_UNFOLLOW
+        </div>
+      )
+    }
+
     const displayItem = accessToken ? (
-      <p>You've signed in... apparently...</p>
+      <div>
+        {}
+        <h2></h2>
+      </div>
     ) : (
       <button onClick={this.requestAuth}>Sign in to Instagram lol</button>
     );
@@ -118,8 +152,8 @@ const BasicExample = () => (
       */}
       {/* <Route path="/about" component={About}/>
       <Route path="/topics" component={Topics}/> */}
-      <Route exact path="/:instaToken" component={Home}/>
-      <Route exact path="/" component={Home}/>
+      {/* <Route exact path="/:instaToken" component={Home}/> */}
+      <Route path="/" component={Home}/>
 
     </div>
   </Router>
