@@ -9,7 +9,7 @@ import Restler from 'restler'
 class Home extends React.Component {
 
   this.state = {
-    instaToken = this.props.match.params.instaToken.subStr(14);
+    instaToken = this.props.match.params.instaToken.substr(14);
   }
 
   componentWillMount() {
