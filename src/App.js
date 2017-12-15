@@ -8,8 +8,12 @@ import Restler from 'restler'
 
 class Home extends React.Component {
 
+  this.state = {
+    instaToken = this.props.match.params.instaToken.subStr(14);
+  }
+
   componentWillMount() {
-    const accessToken = this.props.match.params.instaToken;
+    const accessToken = this.state.instaToken;
     const restURL = `https://api.instagram.com/v1/users/self/?access_token=${accessToken}`
     if (accessToken) {
       Restler.get(restURL).on('complete', (result) => {
@@ -32,7 +36,7 @@ class Home extends React.Component {
 
   render() {
 
-    const accessToken = this.props.match.params.instaToken;
+    const accessToken = this.state.instaToken;
     const displayItem = accessToken ? (
       <p>You've signed in... apparently...</p>
     ) : (
@@ -91,16 +95,16 @@ const Topics = ({ match }) => (
 const BasicExample = () => (
   <Router>
     <div>
-      <ul>
+      {/* <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/topics">Topics</Link></li>
-      </ul>
+        </ul>
 
-      <hr/>
-
-      <Route path="/about" component={About}/>
-      <Route path="/topics" component={Topics}/>
+        <hr/>
+      */}
+      {/* <Route path="/about" component={About}/>
+      <Route path="/topics" component={Topics}/> */}
       <Route exact path="/:instaToken" component={Home}/>
       <Route exact path="/" component={Home}/>
 
