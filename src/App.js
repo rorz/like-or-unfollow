@@ -8,8 +8,8 @@ import Restler from 'restler'
 
 class Home extends React.Component {
 
-  this.state = {
-    instaToken = this.props.match.params.instaToken.substr(14);
+  state = {
+    instaToken: (this.props.match.params.instaToken) && this.props.match.params.instaToken.substr(14),
   }
 
   componentWillMount() {
@@ -32,6 +32,10 @@ class Home extends React.Component {
     const clientID = '514d3f614b3246ce80cc9a4031789c0b';
     const redirectURI = 'https://l-o-u.netlify.com/';
     window.open(`https://api.instagram.com/oauth/authorize/?scope=public_content+follower_list+comments+relationships+likes&client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`);
+  }
+
+  newRound = () => {
+
   }
 
   render() {
